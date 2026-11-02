@@ -5,7 +5,7 @@ def buildJar() {
 
 def buildImage() {
     echo "building the docker image..."
-    withCredentials([usernamePassword(credentialsId: 'nexus-hub-repo', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+    withCredentials([usernamePassword(credentialsId: 'nexus-docker-repo', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
         sh 'docker build -t 192.168.88.151:8083/demo-app:jma-2.0 .'
         sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
         sh 'docker push 192.168.88.151:8083/demo-app:jma-2.0'
